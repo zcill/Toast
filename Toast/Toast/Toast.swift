@@ -41,8 +41,8 @@ final class Toast: UIView {
     
     lazy var messageLabel: UILabel = {
         let messageLabel = UILabel()
-        messageLabel.text = ""
-//        messageLabel.frame = CGRect.init(x: CGRect., y: 0, width: <#T##CGFloat#>, height: <#T##CGFloat#>)
+        messageLabel.text = "show me the code ~~"
+        messageLabel.frame = CGRect.init(x: 40 + 30, y: ui.height/2 - 25/2, width: 200, height: ui.iconHeight)
         messageLabel.numberOfLines = 0
         return messageLabel
     }()
