@@ -1,8 +1,8 @@
 //
 //  AppDelegate.swift
-//  Toast
+//  ToastExample
 //
-//  Created by Locke on 2016/11/18.
+//  Created by Locke on 2016/11/19.
 //  Copyright © 2016年 Meitu. All rights reserved.
 //
 

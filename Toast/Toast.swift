@@ -160,11 +160,6 @@ extension Toast : CAAnimationDelegate {
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
         if anim.isEqual(self.layer.animation(forKey: "dismissAnim")) {
             
-            self.layer.removeAllAnimations()
-            
-            iconImageView.removeFromSuperview()
-            messageLabel.removeFromSuperview()
-            
             self.removeFromSuperview()
             
         } else if anim.isEqual(self.layer.animation(forKey: "showAnim")) {

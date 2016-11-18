@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="ToastExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y8d-v2-dg8">
+                                <rect key="frame" x="0.0" y="597" width="125" height="70"/>
+                                <color key="backgroundColor" red="0.80000001190000003" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="7Oz-61-58h"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="18"/>
+                                <state key="normal" title="Success">
+                                    <color key="titleColor" red="0.31443768739700317" green="0.88981455564498901" blue="0.75987976789474487" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="showSuccess:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Xy0-OL-4a1"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ONc-os-kFW">
+                                <rect key="frame" x="250" y="597" width="125" height="70"/>
+                                <color key="backgroundColor" red="0.50196081400000003" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="18"/>
+                                <state key="normal" title="Error">
+                                    <color key="titleColor" red="0.3144376874" green="0.8898145556" blue="0.7598797679" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="showError:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CZ3-Mb-syd"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wmS-CY-tes">
+                                <rect key="frame" x="125" y="597" width="125" height="70"/>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Verdana-Bold" family="Verdana" pointSize="18"/>
+                                <state key="normal" title="Warning">
+                                    <color key="titleColor" red="0.3144376874" green="0.8898145556" blue="0.7598797679" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="showWarning:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dDr-lU-d8i"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="ONc-os-kFW" firstAttribute="width" secondItem="wmS-CY-tes" secondAttribute="width" id="7gG-e7-QjQ"/>
+                            <constraint firstItem="ONc-os-kFW" firstAttribute="leading" secondItem="wmS-CY-tes" secondAttribute="trailing" id="8eU-NK-sDj"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Y8d-v2-dg8" secondAttribute="bottom" id="983-lf-jIy"/>
+                            <constraint firstItem="wmS-CY-tes" firstAttribute="width" secondItem="Y8d-v2-dg8" secondAttribute="width" id="FpD-I8-EIU"/>
+                            <constraint firstItem="Y8d-v2-dg8" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="1:3" id="UXz-vL-CTG"/>
+                            <constraint firstItem="Y8d-v2-dg8" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Yri-Ff-PGi"/>
+                            <constraint firstItem="wmS-CY-tes" firstAttribute="leading" secondItem="Y8d-v2-dg8" secondAttribute="trailing" id="fvl-ds-Wc7"/>
+                            <constraint firstItem="wmS-CY-tes" firstAttribute="height" secondItem="Y8d-v2-dg8" secondAttribute="height" id="p06-hk-S3M"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ONc-os-kFW" secondAttribute="bottom" id="pIT-Iy-T4i"/>
+                            <constraint firstItem="ONc-os-kFW" firstAttribute="height" secondItem="wmS-CY-tes" secondAttribute="height" id="rvn-tr-5ii"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="wmS-CY-tes" secondAttribute="bottom" id="y7m-s1-46p"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="32.799999999999997" y="37.331334332833585"/>
+        </scene>
+    </scenes>
+</document>
