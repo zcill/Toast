@@ -29,7 +29,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="EFD-oh-0eY" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="hyQ-z0-2Xi"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="EFD-oh-0eY" secondAttribute="bottom" constant="86" id="rZ0-qe-kXP"/>
