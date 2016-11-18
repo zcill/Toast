@@ -10,7 +10,7 @@ import UIKit
 
 final class Toast: UIView {
     
-    struct ui {
+    private struct ui {
         static let ScreenWidth = UIScreen.main.bounds.width
         static let ScreenHeight = UIScreen.main.bounds.height
         static let iconWidth : CGFloat = 25.0
@@ -21,9 +21,10 @@ final class Toast: UIView {
     
     static let sharedInstance = Toast()
     
-    var isShowing = false
-    var message : String?
-    var type : ToastType?
+    private var isShowing = false
+    private var message : String?
+    private var type : ToastType?
+    fileprivate var delay : TimeInterval? = 0
     
     enum ToastType {
         case success
@@ -31,7 +32,7 @@ final class Toast: UIView {
         case warning
     }
     
-    lazy var iconImageView: UIImageView = {
+    fileprivate lazy var iconImageView: UIImageView = {
         let iconImageView = UIImageView()
         iconImageView.image = #imageLiteral(resourceName: "icon_toast_green")
         iconImageView.frame = CGRect.init(x: 0, y: 0, width: ui.iconWidth, height: ui.iconHeight)
@@ -39,13 +40,23 @@ final class Toast: UIView {
         return iconImageView
     }()
     
-    lazy var messageLabel: UILabel = {
+    fileprivate lazy var messageLabel: UILabel = {
         let messageLabel = UILabel()
-        messageLabel.text = "show me the code ~~"
         messageLabel.frame = CGRect.init(x: 40 + 30, y: ui.height/2 - 25/2, width: 200, height: ui.iconHeight)
         messageLabel.numberOfLines = 0
         return messageLabel
     }()
+    
+    deinit {
+        self.layer.removeAllAnimations()
+        
+        iconImageView.removeFromSuperview()
+        messageLabel.removeFromSuperview()
+        
+        self.removeFromSuperview()
+        
+        print("Toast did deinit")
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -66,7 +77,14 @@ final class Toast: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Public
+    
     class func show(type: ToastType, message: String) -> Void {
+        
+        show(type: type, message: message, delay: 2)
+    }
+    
+    class func show(type: ToastType, message: String, delay: TimeInterval) -> Void {
         
         if sharedInstance.isShowing {
             return
@@ -81,27 +99,104 @@ final class Toast: UIView {
             sharedInstance.iconImageView.image = #imageLiteral(resourceName: "icon_toast_orange")
         }
         
-        sharedInstance.setupUI()
+        sharedInstance.delay = delay
         
-        sharedInstance.show(type: type, message: message)
+        sharedInstance.setupUI(message: message)
+        sharedInstance.show()
     }
     
-    func setupUI() -> Void {
+    class func dismiss() -> Void {
         
+        if !sharedInstance.isShowing {
+            return
+        }
         
-        
+        sharedInstance.dismiss()
     }
     
-    func show(type: ToastType, message: String) -> Void {
+    // MARK: - Private
+    
+    private func setupUI(message: String) -> Void {
         
-        
-        
-        
-        
-        
+        messageLabel.text = message
     }
     
+    private func show() -> Void {
+        
+        self.layer.opacity = 0
+        
+        let appDelegate = UIApplication.shared.delegate
+        if let window = appDelegate?.window {
+            window?.addSubview(self)
+        }
+        
+        showAnim()
+    }
     
+    private func dismiss() -> Void {
+        
+        dismissAnim()
+    }
     
+    // MARK: - Animation
+    
+    private func showAnim() -> Void {
+        
+        let group = self.anim(isShow: true)
+        isShowing = true
+        self.layer.add(group, forKey: "showAnim")
+    }
+    
+    fileprivate func dismissAnim() -> Void {
+        
+        let dismissAnim = self.anim(isShow: false)
+        isShowing = false
+        self.layer.add(dismissAnim, forKey: "dismissAnim")
+    }
+}
 
+extension Toast : CAAnimationDelegate {
+    
+    func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
+        if anim.isEqual(self.layer.animation(forKey: "dismissAnim")) {
+            
+            self.layer.removeAllAnimations()
+            
+            iconImageView.removeFromSuperview()
+            messageLabel.removeFromSuperview()
+            
+            self.removeFromSuperview()
+            
+        } else if anim.isEqual(self.layer.animation(forKey: "showAnim")) {
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + delay!, execute: {
+                self.dismissAnim()
+            })
+        }
+    }
+}
+
+extension Toast {
+    
+    func anim(isShow: Bool) -> CAAnimationGroup {
+        
+        let scaleAnim = CAKeyframeAnimation(keyPath: "transform.scale")
+        scaleAnim.values = isShow ? [0.9, 1.0] : [1.0, 0.9]
+        scaleAnim.duration = 0.15
+        
+        let showAnim = CABasicAnimation(keyPath: "opacity")
+        showAnim.fromValue = isShow == true ? 0 : 1
+        showAnim.toValue = isShow == true ? 1 : 0
+        showAnim.duration = 0.15
+        
+        let group = CAAnimationGroup()
+        group.animations = [scaleAnim, showAnim]
+        group.duration = 0.15
+        group.isRemovedOnCompletion = false
+        group.fillMode = kCAFillModeForwards
+        group.delegate = self
+        
+        return group
+    }
+    
 }

@@ -9,20 +9,22 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         
-        let toast = Toast(frame: CGRect.init(x: 0, y: 0, width: 0, height: 0))
-        self.view.addSubview(toast)
-        
-        print(toast.iconImageView.frame)
     }
 
     @IBAction func onClicked(_ sender: UIButton) {
         
+        Toast.show(type: .success, message: "修改成功")
     }
+    
+    @IBAction func dismiss(_ sender: UIButton) {
+        
+        Toast.dismiss()
+    }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
