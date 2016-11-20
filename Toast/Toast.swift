@@ -13,10 +13,10 @@ final class Toast: UIView {
     private struct ui {
         static let ScreenWidth = UIScreen.main.bounds.width
         static let ScreenHeight = UIScreen.main.bounds.height
-        static let iconWidth : CGFloat = 25.0
-        static let iconHeight : CGFloat = 25.0
+        static let iconWidth : CGFloat = 20
+        static let iconHeight : CGFloat = 20
         static let width = ui.ScreenWidth - 70.0
-        static let height : CGFloat = 75.0
+        static let height : CGFloat = 65
     }
     
     static let sharedInstance = Toast()
@@ -42,8 +42,9 @@ final class Toast: UIView {
     
     fileprivate lazy var messageLabel: UILabel = {
         let messageLabel = UILabel()
-        messageLabel.frame = CGRect.init(x: 40 + 30, y: ui.height/2 - 25/2, width: 200, height: ui.iconHeight)
+        messageLabel.frame = CGRect.init(x: 40 + 30, y: ui.height/2 - ui.iconWidth/2, width: 150, height: ui.iconHeight)
         messageLabel.numberOfLines = 0
+        messageLabel.adjustsFontSizeToFitWidth = true
         return messageLabel
     }()
     
